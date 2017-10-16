@@ -40,4 +40,9 @@ func RemuxMKVToMP4(dir, source string) {
 		log.Fatal(err)
 	}
 	log.Println("Remuxed " + source + " to " + baseFilename(source) + ".mp4")
+	err = os.Remove(source)
+	if err != nil {
+		log.Fatal(err)
+	}
+	log.Print("Removed source file " + source)
 }
