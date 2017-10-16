@@ -28,12 +28,21 @@ func CORSMiddleware() gin.HandlerFunc {
 	}
 }
 
-var SonarrClient = sonarr.NewSonarrClient("http://localhost:8989", "apikey")
+func InitSonarrClient() (err error) {
+	SonarrClient, err = sonarr.NewSonarrClient("http://localhost:8989", "apikey")
+	return err
+}
+
+var SonarrClient *sonarr.SonarrClient
 
 func main() {
 	r := gin.Default()
 
 	r.Use(CORSMiddleware())
+
+	if err := InitSonarrClient(); err != nil {
+		panic(err)
+	}
 
 	api := r.Group("/api")
 	{
