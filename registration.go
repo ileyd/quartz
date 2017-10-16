@@ -18,6 +18,7 @@ func RegisterSonarrEvent(event SonarrEvent) (err error) {
 	if extension == "mkv" || extension == ".mkv" {
 		time.Sleep(time.Second * 15) // conversion seems to get triggered too early
 		RemuxMKVToMP4(dir, event.Series.Path+"/"+event.EpisodeFile.RelativePath)
+		SonarrClient.RescanSeries(event.Series.ID)
 	}
 
 	return err

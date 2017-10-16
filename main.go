@@ -6,6 +6,7 @@ import (
 	"runtime"
 
 	"github.com/gin-gonic/gin"
+	"github.com/ileyd/sonarr"
 )
 
 //CORSMiddleware ...
@@ -26,6 +27,8 @@ func CORSMiddleware() gin.HandlerFunc {
 		}
 	}
 }
+
+var SonarrClient = sonarr.NewSonarrClient("http://localhost:8989", "apikey")
 
 func main() {
 	r := gin.Default()
